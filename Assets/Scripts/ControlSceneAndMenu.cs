@@ -6,17 +6,14 @@ using UnityEngine.UI;
 
 public class ControlSceneAndMenu : MonoBehaviour
 {
-    public GameObject buttonsMenu;
-    public GameObject buttonsExit;
-    public GameObject buttonsLevels;
+    public GameObject panelMenu;
+    public GameObject panelExit;
+    public GameObject panelLevels;
 
     public Button FirstLevelBtn;
     public Button SecondLevelBtn;
     public Button ThirdLevelBtn;
     private int levelComplete;
-
-
-
 
 
     // Start is called before the first frame update
@@ -60,21 +57,21 @@ public class ControlSceneAndMenu : MonoBehaviour
 
     public void ShowLevels()
     {
-        buttonsLevels.SetActive(true);
-        buttonsMenu.SetActive(false);
+        panelLevels.SetActive(true);
+        panelMenu.SetActive(false);
     }
 
     public void ShowExitButtons()
     {
-        buttonsMenu.SetActive(false);
-        buttonsExit.SetActive(true);
+        panelMenu.SetActive(false);
+        panelExit.SetActive(true);
     }
 
     public void BackToMenu()
     {
-        buttonsMenu.SetActive(true);
-        buttonsExit.SetActive(false);
-        buttonsLevels.SetActive(false);
+        panelMenu.SetActive(true);
+        panelExit.SetActive(false);
+        panelLevels.SetActive(false);
     }
 
     public void ExitGame()

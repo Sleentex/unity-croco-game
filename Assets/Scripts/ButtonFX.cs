@@ -7,7 +7,7 @@ public class ButtonFX : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip hoverAudio;
     public AudioClip clickAudio;
-    
+
     public void HoverSound()
     {
         audioSource.PlayOneShot(hoverAudio);
@@ -17,4 +17,5 @@ public class ButtonFX : MonoBehaviour
     {
         audioSource.PlayOneShot(clickAudio);
     }
+
 }
