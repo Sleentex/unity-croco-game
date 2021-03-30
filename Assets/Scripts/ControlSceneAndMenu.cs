@@ -83,7 +83,8 @@ public class ControlSceneAndMenu : MonoBehaviour
     {
         
         //SceneManager.LoadScene("Game", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(PlayerPrefs.GetInt("LevelComplete") + 1);
+       
         //Application.LoadLevel("Game");
     }
 
