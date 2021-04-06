@@ -35,9 +35,7 @@ public class MoveableMonster : Monster
             // Треба стрибати на монстра щоб убити
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.6F) // якщо сидіти біля краю то не убиває (БАГ) 0.76F
             {
-                (unit as Character).changeForce();
-                ReceiveDemage();
-                
+                ReceiveDemage();           
             }
             else
             {

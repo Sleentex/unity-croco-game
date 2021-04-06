@@ -8,10 +8,13 @@ public enum CharacterState
     Idle,
     Jump,
     Run,
+    Dizzy,
 }
 
 public class Character : Unit
 {
+    const float INTERVAL_DAMAGE = 0.5F;
+
     [SerializeField]
     private float speed = 5.0F;
 
@@ -92,11 +95,12 @@ public class Character : Unit
     {
         if (Time.timeScale != 0F) // щоб не виконувало дії при меню паузи
         {
-            if (Time.time > LastRecievedDamageTime + 0.5F && sprite.material.color == Color.red) sprite.material.color = Color.white;
+            if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE && sprite.material.color == Color.red) sprite.material.color = Color.white;
+            
             if (isGrounded) State = CharacterState.Idle;
             if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
             if (Input.GetButton("Horizontal")) Run();
-            if (Time.time > LastRecievedDamageTime + 0.5F)
+            if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE)
             {
                 if (isGrounded && Input.GetButtonDown("Jump")) Jump();
             }
@@ -153,9 +157,13 @@ public class Character : Unit
     }
 
 
-    public void changeForce()
+    public void AddOppositeForce() 
     {
-        rigidbody.AddForce(transform.up * 12.0F, ForceMode2D.Impulse); // кидає у верх при ударі з преградою 
+        int oppositeDirection = 1; // щоб гравітація була в противоположну сторону
+        if (direction.x > 0) oppositeDirection *= -1;
+
+        rigidbody.velocity = Vector3.zero; // коли ігрок падає зверху на преграду, то його ускоренія більша, тому треба обнулити ускоренія
+        rigidbody.AddForce(transform.up * 12.0F + transform.right * 2.0F * oppositeDirection, ForceMode2D.Impulse); // кидає у верх при ударі з преградою 
     }
 
 
@@ -163,10 +171,11 @@ public class Character : Unit
     public override void ReceiveDemage()
     {
 
-        if (Time.time - LastRecievedDamageTime <= 0.5F) return;
+        if (Time.time - LastRecievedDamageTime <= INTERVAL_DAMAGE) return;
         LastRecievedDamageTime = Time.time; // час у секундах з початку гри 
 
         --Lives;
+        State = CharacterState.Dizzy;
 
         if (Lives <= 0)
         {
@@ -177,16 +186,11 @@ public class Character : Unit
         {
             isGrounded = false;
             sprite.material.color = Color.red;
-
-            int oppositeDirection = 1; // щоб гравітація була в противоположну сторону
-            if (direction.x > 0) oppositeDirection *= -1;
-            
-            rigidbody.velocity = Vector3.zero; // коли ігрок падає зверху на преграду, то його ускоренія більша, тому треба обнулити ускоренія
-            rigidbody.AddForce(transform.up * 12.0F + transform.right * 2.0F * oppositeDirection, ForceMode2D.Impulse); // кидає у верх при ударі з преградою 
+            AddOppositeForce();
         }
 
 
-        Debug.Log(lives);
+        //Debug.Log(lives);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
