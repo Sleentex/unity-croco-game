@@ -148,12 +148,20 @@ public class Character : Unit
 
     private void CheckGround()
     {
-        // Physics2D.OverlapCircleAll = внизу ігрока буде круг, який перевірятиме якщо існує в ньому інші колайдери
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3F);
 
-        isGrounded = colliders.Length > 1; // Більше 1 тому що в ньому завжди буде колайдер ігрока
+        if (Time.time <= LastRecievedDamageTime + INTERVAL_DAMAGE)
+        {
+            State = CharacterState.Dizzy;
+        }
+        else
+        {
+            // Physics2D.OverlapCircleAll = внизу ігрока буде круг, який перевірятиме якщо існує в ньому інші колайдери
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3F);
 
-        if (!isGrounded) State = CharacterState.Jump;
+            isGrounded = colliders.Length > 1; // Більше 1 тому що в ньому завжди буде колайдер ігрока
+            if (!isGrounded) State = CharacterState.Jump;
+        }
+       
     }
 
 
