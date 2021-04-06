@@ -9090,6 +9090,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 666588304912638325, guid: 5871546ac2fed8949bb1eca6f68e5e9f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 666588304912638327, guid: 5871546ac2fed8949bb1eca6f68e5e9f,
         type: 3}
       propertyPath: m_RootOrder
@@ -9955,6 +9960,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6069850274402132368, guid: ad6c5328cc8609a4e8f526dc8a7d7197,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6069850274402132369, guid: ad6c5328cc8609a4e8f526dc8a7d7197,
         type: 3}
       propertyPath: m_Name
@@ -9963,7 +9973,7 @@ PrefabInstance:
     - target: {fileID: 6069850274402132369, guid: ad6c5328cc8609a4e8f526dc8a7d7197,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6069850274402132369, guid: ad6c5328cc8609a4e8f526dc8a7d7197,
         type: 3}
