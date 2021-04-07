@@ -33,14 +33,16 @@ public class MoveableMonster : Monster
         if (unit && unit is Character)
         {
             // Треба стрибати на монстра щоб убити
-            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.6F) // якщо сидіти біля краю то не убиває (БАГ) 0.76F
+            /*if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.6F) // якщо сидіти біля краю то не убиває (БАГ) 0.76F
             {
                 ReceiveDemage();           
             }
             else
             {
                 unit.ReceiveDemage();
-            }
+            }*/
+
+            unit.ReceiveDemage();
         }
     }
 
