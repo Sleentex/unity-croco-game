@@ -93,12 +93,12 @@ public class Character : Unit
 
     private void Update()
     {
-        if (Time.timeScale != 0F) // щоб не виконувало дії при меню паузи
+        if (Time.timeScale == 1F) // щоб не виконувало дії при меню паузи
         {
             if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE && sprite.material.color == Color.red) sprite.material.color = Color.white;
             
             if (isGrounded) State = CharacterState.Idle;
-            if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
+            //if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
             if (Input.GetButton("Horizontal")) Run();
             if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE)
             {
@@ -156,7 +156,7 @@ public class Character : Unit
         else
         {
             // Physics2D.OverlapCircleAll = внизу ігрока буде круг, який перевірятиме якщо існує в ньому інші колайдери
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3F);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5F);
 
             isGrounded = colliders.Length > 1; // Більше 1 тому що в ньому завжди буде колайдер ігрока
             if (!isGrounded) State = CharacterState.Jump;

@@ -39,6 +39,7 @@ public class GamePause : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         panelExit.SetActive(false);
+
         Time.timeScale = 0F; // екран зупиняється, від 0 до 1, 1 це норм хід ігри
         GameIsPaused = true;
     }

@@ -9,6 +9,8 @@ public class LevelController : MonoBehaviour
     private int sceneIndex;
     private int levelComplete;
 
+    public GameObject congratulatonsUI; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,8 @@ public class LevelController : MonoBehaviour
 
     public void IsEndGame()
     {
+        Time.timeScale = 0F;
+
         if (sceneIndex == 3)
         {
             Invoke("LoadMainMenu", 1F);
@@ -33,18 +37,34 @@ public class LevelController : MonoBehaviour
             {
                 PlayerPrefs.SetInt("LevelComplete", sceneIndex);
             }
-            Invoke("NextLevel", 1F);
+
+            congratulatonsUI.SetActive(true);
+
+            //Invoke("NextLevel", 1F);
         }
     }
 
-    private void NextLevel()
+    public void NextLevel()
     {
+        Time.timeScale = 1F;
         SceneManager.LoadScene(sceneIndex + 1);
     }
 
-    private void LoadMainMenu()
+    public void LoadMainMenu()
     {
+        Time.timeScale = 1F;
         SceneManager.LoadScene("Menu");
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1F;
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     // Update is called once per frame
