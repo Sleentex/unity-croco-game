@@ -144,6 +144,15 @@ public class Character : Unit
         newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -1.0F : 1.0F); // щоб знати з якого боку появилась пуля
     }
 
+    private void OnDrawGizmos()
+    {
+        Vector3 tr = transform.position;
+        tr.y += 0.3F;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(tr, 0.5F);
+
+    }
 
 
     private void CheckGround()
@@ -155,10 +164,15 @@ public class Character : Unit
         }
         else
         {
-            // Physics2D.OverlapCircleAll = внизу ігрока буде круг, який перевірятиме якщо існує в ньому інші колайдери
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5F);
 
-            isGrounded = colliders.Length > 1; // Більше 1 тому що в ньому завжди буде колайдер ігрока
+            Vector2 tr = transform.position;
+            tr.y += 0.3F;
+            // Physics2D.OverlapCircleAll = внизу ігрока буде круг, який перевірятиме якщо існує в ньому інші колайдери
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(tr, 0.5F, LayerMask.GetMask("Ground"));
+
+
+
+            isGrounded = colliders.Length > 0; // Більше 1 тому що в ньому завжди буде колайдер ігрока
             if (!isGrounded) State = CharacterState.Jump;
         }
        

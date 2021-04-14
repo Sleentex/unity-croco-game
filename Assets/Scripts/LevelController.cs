@@ -9,7 +9,14 @@ public class LevelController : MonoBehaviour
     private int sceneIndex;
     private int levelComplete;
 
-    public GameObject congratulatonsUI; 
+    public GameObject congratulatonsUI;
+
+    private Character target;
+
+    private void Awake()
+    {
+        if (!target) target = FindObjectOfType<Character>();
+    }
 
 
     // Start is called before the first frame update
@@ -26,7 +33,9 @@ public class LevelController : MonoBehaviour
 
     public void IsEndGame()
     {
-        Time.timeScale = 0F;
+        Time.timeScale = 0.5F;
+        target.Rigidbody.AddForce(transform.up * 12.0F, ForceMode2D.Impulse);
+        target.Rigidbody.AddForce(transform.up * 12.0F, ForceMode2D.Impulse);
 
         if (sceneIndex == 3)
         {
@@ -38,10 +47,19 @@ public class LevelController : MonoBehaviour
                 PlayerPrefs.SetInt("LevelComplete", sceneIndex);
             }
 
-            congratulatonsUI.SetActive(true);
+
+            Invoke("ShowUI", 1F);
+
+            //congratulatonsUI.SetActive(true);
 
             //Invoke("NextLevel", 1F);
         }
+    }
+
+    private void ShowUI()
+    {
+        Time.timeScale = 0F;
+        congratulatonsUI.SetActive(true);
     }
 
     public void NextLevel()
