@@ -9,6 +9,7 @@ public class ControlSceneAndMenu : MonoBehaviour
     public GameObject panelMenu;
     public GameObject panelExit;
     public GameObject panelLevels;
+    public GameObject panelSettings;
 
     public Button FirstLevelBtn;
     public Button SecondLevelBtn;
@@ -61,6 +62,12 @@ public class ControlSceneAndMenu : MonoBehaviour
         panelMenu.SetActive(false);
     }
 
+    public void ShowSettings()
+    {
+        panelSettings.SetActive(true);
+        panelMenu.SetActive(false);
+    }
+
     public void ShowExitButtons()
     {
         panelMenu.SetActive(false);
@@ -72,6 +79,7 @@ public class ControlSceneAndMenu : MonoBehaviour
         panelMenu.SetActive(true);
         panelExit.SetActive(false);
         panelLevels.SetActive(false);
+        panelSettings.SetActive(false);
     }
 
     public void ExitGame()
