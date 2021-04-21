@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime;
 
 public class ShootableMonster : Monster
 {
@@ -10,10 +11,12 @@ public class ShootableMonster : Monster
     private Color bulletColor = Color.white;
 
     private Bullet bullet;
+    private SpriteRenderer sprite;
 
     protected override void Awake()
     {
         bullet = Resources.Load<Bullet>("Bullet");
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected override void Start()
@@ -28,8 +31,10 @@ public class ShootableMonster : Monster
 
         Bullet newBullet = Instantiate(bullet, position, bullet.transform.rotation) as Bullet;
 
+        int direction = sprite.flipX != false ? 1 : -1;
+        
         newBullet.Parent = gameObject;
-        newBullet.Direction = newBullet.transform.right * (-1); // щоб вліво дивився (треба зробити і вправа!!!)
+        newBullet.Direction = newBullet.transform.right * direction; // щоб вліво дивився (треба зробити і вправа!!!)
         newBullet.Color = bulletColor;
         
 

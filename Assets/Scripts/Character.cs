@@ -147,10 +147,10 @@ public class Character : Unit
     private void OnDrawGizmos()
     {
         Vector3 tr = transform.position;
-        tr.y += 0.3F;
+        tr.y += 0.2F;
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(tr, 0.5F);
+        Gizmos.DrawWireSphere(tr, 0.3F);
 
     }
 
@@ -166,9 +166,9 @@ public class Character : Unit
         {
 
             Vector2 tr = transform.position;
-            tr.y += 0.3F;
+            tr.y += 0.25F;
             // Physics2D.OverlapCircleAll = внизу ігрока буде круг, який перевірятиме якщо існує в ньому інші колайдери
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(tr, 0.5F, LayerMask.GetMask("Ground"));
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(tr, 0.3F, LayerMask.GetMask("Ground"));
 
 
 
