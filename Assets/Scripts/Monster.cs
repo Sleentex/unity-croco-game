@@ -21,7 +21,7 @@ public class Monster : Unit
 
         if (character)
         {
-            character.ReceiveDemage();
+            character.ReceiveDemage(2);
         }
     }
 }

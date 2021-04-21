@@ -10,6 +10,9 @@ public class DieSpace : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
+            Character character = collider.GetComponent<Character>();
+            character.Lives = 5;
+
             collider.transform.position = respawn.transform.position;
         }
     }

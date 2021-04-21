@@ -98,7 +98,7 @@ public class Character : Unit
             if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE && sprite.material.color == Color.red) sprite.material.color = Color.white;
             
             if (isGrounded) State = CharacterState.Idle;
-            //if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
+            if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
             if (Input.GetButton("Horizontal")) Run();
             if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE)
             {
@@ -190,13 +190,13 @@ public class Character : Unit
 
 
 
-    public override void ReceiveDemage()
+    public override void ReceiveDemage(int damage_count = 1)
     {
 
         if (Time.time - LastRecievedDamageTime <= INTERVAL_DAMAGE) return;
         LastRecievedDamageTime = Time.time; // час у секундах з початку гри 
 
-        --Lives;
+        Lives -= damage_count;
         State = CharacterState.Dizzy;
 
         if (Lives <= 0)

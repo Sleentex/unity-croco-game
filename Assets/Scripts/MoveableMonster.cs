@@ -42,7 +42,7 @@ public class MoveableMonster : Monster
                 unit.ReceiveDemage();
             }*/
 
-            unit.ReceiveDemage();
+            unit.ReceiveDemage(2);
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public virtual void ReceiveDemage()
+    public virtual void ReceiveDemage(int damage_count = 1)
     {
         Die();
     }

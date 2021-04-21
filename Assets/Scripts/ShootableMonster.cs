@@ -51,7 +51,7 @@ public class ShootableMonster : Monster
                 unit.ReceiveDemage();
             }*/
 
-            unit.ReceiveDemage();
+            unit.ReceiveDemage(3);
         }
     }
 }
