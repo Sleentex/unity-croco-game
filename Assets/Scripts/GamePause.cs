@@ -10,6 +10,7 @@ public class GamePause : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject panelExit;
 
+
     // Update is called once per frame
     void Update()
     {

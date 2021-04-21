@@ -65,6 +65,17 @@ public class Character : Unit
         set { lastRecievedDamageTime = value; }
     }
 
+    [SerializeField]
+    private AudioClip audioDie;
+    [SerializeField]
+    private AudioClip audioJump;
+    [SerializeField]
+    private AudioClip audioCongratulations;
+    [SerializeField]
+    private AudioClip audioDamage;
+
+    private AudioSource audioSource;
+    private AudioSource childAudioSource;
 
     private void Start()
     {
@@ -74,6 +85,9 @@ public class Character : Unit
 
     private void Awake()
     {
+        
+        audioSource = GetComponent<AudioSource>();
+        childAudioSource = GetComponentsInChildren<AudioSource>()[1];
         livesBar = FindObjectOfType<LivesBar>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -96,9 +110,13 @@ public class Character : Unit
         if (Time.timeScale == 1F) // щоб не виконувало дії при меню паузи
         {
             if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE && sprite.material.color == Color.red) sprite.material.color = Color.white;
-            
+
+            if (Input.GetKeyDown(KeyCode.M)) AudioListener.pause = !AudioListener.pause;
+            if (Input.GetKeyDown(KeyCode.N)) audioSource.mute = !audioSource.mute; 
+            if (Input.GetKeyDown(KeyCode.B)) childAudioSource.mute = !childAudioSource.mute;
+
             if (isGrounded) State = CharacterState.Idle;
-            if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
+            //if (Input.GetButtonDown("Fire1")) Shoot(); // Left Ctrl
             if (Input.GetButton("Horizontal")) Run();
             if (Time.time > LastRecievedDamageTime + INTERVAL_DAMAGE)
             {
@@ -126,6 +144,8 @@ public class Character : Unit
 
     private void Jump()
     {
+        audioSource.clip = audioJump;
+        audioSource.Play();
         State = CharacterState.Jump;
 
         rigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
@@ -188,13 +208,12 @@ public class Character : Unit
         rigidbody.AddForce(transform.up * 12.0F + transform.right * 2.0F * oppositeDirection, ForceMode2D.Impulse); // кидає у верх при ударі з преградою 
     }
 
-
-
     public override void ReceiveDemage(int damage_count = 1)
     {
-
         if (Time.time - LastRecievedDamageTime <= INTERVAL_DAMAGE) return;
         LastRecievedDamageTime = Time.time; // час у секундах з початку гри 
+
+        PlayAudioDamage();
 
         Lives -= damage_count;
         State = CharacterState.Dizzy;
@@ -223,6 +242,25 @@ public class Character : Unit
         {
             ReceiveDemage();
         }
+    }
+
+    public void PlayAudioDie()
+    {
+        audioSource.clip = audioDie;
+        audioSource.Play();
+    }
+
+
+    public void PlayAudioCongratulations()
+    {
+        audioSource.clip = audioCongratulations;
+        audioSource.Play();
+    }
+
+    public void PlayAudioDamage()
+    {
+        audioSource.clip = audioDamage;
+        audioSource.Play();
     }
 }
 

@@ -33,6 +33,7 @@ public class LevelController : MonoBehaviour
 
     public void IsEndGame()
     {
+        target.PlayAudioCongratulations();
         Time.timeScale = 0.5F;
         target.Rigidbody.AddForce(transform.up * 12.0F, ForceMode2D.Impulse);
         target.Rigidbody.AddForce(transform.up * 12.0F, ForceMode2D.Impulse);
